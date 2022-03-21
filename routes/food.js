@@ -1,10 +1,17 @@
 import express from "express";
 
-import { getFoods, postFood } from "../controllers/food.js";
+import {
+  getRecipe,
+  getFoods,
+  postFood,
+  updateFood,
+} from "../controllers/food.js";
 
 const router = express.Router();
 
 router.get("/foods", getFoods);
+router.get("/food/:id", getRecipe);
 router.post("/foods", postFood);
+router.patch("/:id", updateFood);
 
 export default router;
