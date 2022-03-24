@@ -36,9 +36,7 @@ export const postFood = async (req, res) => {
   try {
     await newPost.save();
 
-    res.status(201).json({
-      message: "uploaded!",
-    });
+    res.status(201).json(post);
   } catch (error) {
     res.status(409).json({
       status: "error",
@@ -54,8 +52,12 @@ export const updateFood = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).json({ error: "error", message: "post not found" });
 
-  const updatedPost = await FoodModel.findByIdAndUpdate(_id, post, {
-    new: true,
-  });
+  const updatedPost = await FoodModel.findByIdAndUpdate(
+    _id,
+    { ...post, id: _id },
+    {
+      new: true,
+    }
+  );
   res.status(201).json(updatedPost);
 };
