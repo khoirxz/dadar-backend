@@ -61,3 +61,13 @@ export const updateFood = async (req, res) => {
   );
   res.status(201).json(updatedPost);
 };
+
+export const deleteFood = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({ error: "error", message: "post not found" });
+
+  await FoodModel.findByIdAndRemove(id);
+  res.json({ message: "Deleted!" });
+};
