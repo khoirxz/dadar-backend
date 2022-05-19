@@ -71,3 +71,17 @@ export const deleteFood = async (req, res) => {
   await FoodModel.findByIdAndRemove(id);
   res.json({ message: "Deleted!" });
 };
+
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({ error: "error", message: "post not found" });
+
+  const post = await FoodModel.findById(id);
+  const updateFood = await FoodModel.findByIdAndUpdate(id, {
+    likeCount: post.likeCount + 1,
+  });
+
+  res.json(updateFood);
+};

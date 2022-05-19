@@ -11,6 +11,10 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("DADAR API by Rizqi K.");
+  res.end();
+});
 app.use("/api", foodRoutes);
 
 // conntect to database
