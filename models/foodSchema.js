@@ -5,6 +5,7 @@ const foodSchema = mongoose.Schema({
   description: String,
   creator: String,
   selectedFile: String,
+  link: String,
   likeCount: {
     type: Number,
     default: 0,

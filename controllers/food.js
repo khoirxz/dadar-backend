@@ -31,8 +31,12 @@ export const getRecipe = async (req, res) => {
 
 export const postFood = async (req, res) => {
   const post = req.body;
+  const link = post.title
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^\w-]+/g, "");
 
-  const newPost = new FoodModel(post);
+  const newPost = new FoodModel({ ...post, link });
   try {
     await newPost.save();
 
